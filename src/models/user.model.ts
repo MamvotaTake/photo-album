@@ -20,6 +20,7 @@ userSchema.pre("save", async function(next){
         const hash = bcrypt.hashSync(user.password, salt)
 
         user.password = hash
+        return next()
     }
 })
 
@@ -27,6 +28,7 @@ userSchema.methods.comparePassword = async function (candidatePassword: string) 
     const user = this as UserDocument
     return bcrypt.compare(candidatePassword, user.password)
 }
+
 const UserModel = mongoose.model<UserDocument>("User", userSchema)
 
 export default UserModel
