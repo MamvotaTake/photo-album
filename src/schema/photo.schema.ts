@@ -1,6 +1,8 @@
-import {object, string} from "zod";
+import {object, string, TypeOf} from "zod";
+import {util} from "zod/lib/helpers/util";
+import objectKeys = util.objectKeys;
 
-const createPhotoSchema = object({
+const payload = {
     body: object({
         title:string({
             required_error: "The field title should not be empty"
@@ -14,6 +16,29 @@ const createPhotoSchema = object({
         })
 
     })
+}
+
+const params = {
+    params: {
+        photoId: string({
+            required_error: "PhotoId is required"
+        })
+    }
+}
+
+export const loadPhotoSchema = object({
+    ...payload
 })
 
-export default createPhotoSchema
+export const getAllPhotoSchema = object({
+    ...payload
+})
+
+// @ts-ignore
+export const deletePhotoSchema = object({
+    ...params
+})
+
+export type LoadPhotoInput = TypeOf<typeof loadPhotoSchema>
+export type GetAllPhotoInput = TypeOf<typeof getAllPhotoSchema>
+export type DeletePhotoInput = TypeOf<typeof deletePhotoSchema>

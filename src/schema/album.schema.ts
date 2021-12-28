@@ -1,6 +1,6 @@
-import {object, string} from "zod";
+import {object, string, TypeOf} from "zod";
 
-const createAlbumSchema = object({
+const payload = {
     body: object({
         title: string({
             required_error: "Title is required"
@@ -9,6 +9,25 @@ const createAlbumSchema = object({
             required_error: "Owner field should not be empty."
         })
     })
+}
+const params = {
+    params: {
+        albumId: string({
+            required_error: "AlbumId is required"
+        })
+    }
+}
+// @ts-ignore
+export const deleteAlbumSchema = object({
+    ...params
 })
 
-export default createAlbumSchema
+// @ts-ignore
+export const updateAlbumSchema = object({
+    ...payload,
+    ...params
+})
+
+
+export type DeleteAlbumInput = TypeOf<typeof deleteAlbumSchema>
+export type UpdateAlbumInput = TypeOf<typeof updateAlbumSchema>
