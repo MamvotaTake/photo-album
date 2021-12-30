@@ -5,7 +5,7 @@ const payload = {
         title: string({
             required_error: "Title is required"
         }),
-        owner: string({
+        user: string({
             required_error: "Owner field should not be empty."
         })
     })
@@ -17,6 +17,10 @@ const params = {
         })
     }
 }
+export const loadAlbumSchema = object({
+    ...payload
+})
+
 // @ts-ignore
 export const deleteAlbumSchema = object({
     ...params

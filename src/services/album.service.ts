@@ -1,10 +1,16 @@
-import {FilterQuery, QueryOptions, UpdateQuery} from "mongoose";
+import {DocumentDefinition, FilterQuery, QueryOptions, UpdateQuery} from "mongoose";
 import {AlbumDocument} from "../interface/album.interface";
 import AlbumModel from "../models/album.model";
 
-export async function findAlbum(query: FilterQuery<AlbumDocument>){
+export async function loadAlbum(input: DocumentDefinition<AlbumDocument>) {
+    return AlbumModel.create(input)
+}
+
+
+export async function findAlbum(query: FilterQuery<AlbumDocument>) {
     return AlbumModel.findOne(query)
 }
+
 export async function deleteAlbum(query: FilterQuery<AlbumDocument>) {
     return AlbumModel.deleteOne(query)
 }

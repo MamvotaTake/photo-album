@@ -11,7 +11,7 @@ const payload = {
             required_error: "The url should not be empty"
         }),
 
-        thumbnail: string({
+        thumbnailUrl: string({
             required_error: "The field thumbnail should not be empty"
         })
 
@@ -26,10 +26,6 @@ const params = {
     }
 }
 
-export const loadPhotoSchema = object({
-    ...payload
-})
-
 export const getAllPhotoSchema = object({
     ...payload
 })
@@ -39,6 +35,5 @@ export const deletePhotoSchema = object({
     ...params
 })
 
-export type LoadPhotoInput = TypeOf<typeof loadPhotoSchema>
 export type GetAllPhotoInput = TypeOf<typeof getAllPhotoSchema>
 export type DeletePhotoInput = TypeOf<typeof deletePhotoSchema>

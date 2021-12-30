@@ -4,15 +4,16 @@ import {customAlphabet} from "nanoid";
 
 const nanoid = customAlphabet("abcdefghijklmnopkrstuvwxyz0123456789", 10)
 
+
 const albumSchema = new mongoose.Schema({
     albumId:{
-        type:String,
+        type: String,
         required: true,
         unique: true,
-        default: () => `album_${nanoid()}`,
+        default: () => `album_${nanoid()}`
     },
     title: {type: String},
-    owner: {type: String, required: true}
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 })
 const AlbumModel = mongoose.model<AlbumDocument>("Album", albumSchema)
 

@@ -9,14 +9,15 @@ const photoSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        default: () => `product_${nanoid()}`
+        default: () => `photo_${nanoid()}`
     },
-    albumId:{type: mongoose.Schema.Types.ObjectId, ref: "Album"},
+    albumId:{type: Number, ref: "Album"},
+    user: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
     title:{type: String},
     url:{type: String},
-    thumbnail:{type:String},
-    ownerId: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
-})
+    thumbnailUrl:{type:String},
+
+}, {timestamps: true})
 
 const PhotoModel = mongoose.model<PhotoDocument>("Photo", photoSchema )
 

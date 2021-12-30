@@ -26,6 +26,5 @@ RuPBHl5rBFK3RbEQJjq9qoCcmPxx4lrTO4vFsfTxQGx1F9aMEmey0AuE5exVmMXG
 rHUOcqJettJyDIEpLwIDAQAB
 -----END PUBLIC KEY-----`,
 
-    //Axios Default
-    baseURL: 'https://jsonplaceholder.typicode.com'
+    PER_PAGE: 6,
 }
