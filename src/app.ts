@@ -1,11 +1,10 @@
 import express from 'express'
+require('dotenv').config()
 import config from 'config';
 import logger from "./utils/logger";
 import connect from "./utils/connect";
 import routes from "./routes";
 import deserializeUser from "./middleware/deserializeUser";
-// const axios = require('axios').default;
-import dotenv from 'dotenv'
 
 
 const PORT = config.get('port')
@@ -16,7 +15,6 @@ app.use(express.json())
 
 app.use(deserializeUser)
 
-dotenv.config()
 
 
 app.listen(PORT, async ()=>{

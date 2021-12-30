@@ -1,10 +1,10 @@
 export default {
     port: 3000,
-    dbUri: "mongodb+srv://takesure:qwerty123@cluster0.yvvoj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    saltRounds: 10,
-    accessTokenTtl: '1h',
-    refreshTokenTtl: '1y',
-    privateKey: `-----BEGIN RSA PRIVATE KEY-----
+    dbUri: process.env.MONGO_URL,
+    saltRounds: process.env.SALT,
+    accessTokenTtl: process.env.ACCESS_TOKEN,
+    refreshTokenTtl: process.env.REFRESH_TOKEN,
+    privateKey:`-----BEGIN RSA PRIVATE KEY-----
 MIICXQIBAAKBgQCvrSkA/6Ci1w9/Z3ia19Azp2LyLTGAbzi2fcW69R9wY48VIBK2
 XxGt0A9W4B5531D5KZSm7OsWGphOrPeiw3ExiA3mRuPBHl5rBFK3RbEQJjq9qoCc
 mPxx4lrTO4vFsfTxQGx1F9aMEmey0AuE5exVmMXGrHUOcqJettJyDIEpLwIDAQAB
@@ -19,12 +19,11 @@ GC69fUhaZrnWcFtqZYOMSa/gwm7vF5naQadCSNOy7fKkdsTHns3FkXZNZm7cxrMh
 HpgVSgAd2mxMB1WHILufAkBRQySTXlv+8tgaF5yWRWuaBTJ0j5zzRtbpSF3YZizV
 4s/+oPrryzxvwqFJvK4pQnmsNoheU9XlJJus8xxSfcmR
 -----END RSA PRIVATE KEY-----`,
-    publicKey: `-----BEGIN PUBLIC KEY-----
+    publicKey:`-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCvrSkA/6Ci1w9/Z3ia19Azp2Ly
 LTGAbzi2fcW69R9wY48VIBK2XxGt0A9W4B5531D5KZSm7OsWGphOrPeiw3ExiA3m
 RuPBHl5rBFK3RbEQJjq9qoCcmPxx4lrTO4vFsfTxQGx1F9aMEmey0AuE5exVmMXG
 rHUOcqJettJyDIEpLwIDAQAB
 -----END PUBLIC KEY-----`,
-
     PER_PAGE: 6,
 }

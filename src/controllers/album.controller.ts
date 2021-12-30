@@ -5,24 +5,27 @@ import {deleteAlbum, findAlbum, updateAlbum} from "../services/album.service";
 
 
 export async function deleteAlbumHandler(
-    req: Request<DeleteAlbumInput["params"]>,
+    req: Request<UpdateAlbumInput["params"]>,
     res: Response) {
 
     const userId = res.locals.user._id
     const albumId = req.params.albumId
+    console.log(albumId);
 
     const album = await findAlbum({albumId})
 
     if (!album) return res.sendStatus(404)
 
 
-    if (String(album.user !== userId)) {
+    if (String(album.user) !== userId) {
         return res.sendStatus(403);
     }
 
     await deleteAlbum({albumId})
 
-    return res.sendStatus(200)
+    return res.status(200).json({
+        message: 'Album has successfully deleted'
+    })
 }
 
 export async function updateAlbumHandler(
@@ -34,6 +37,7 @@ export async function updateAlbumHandler(
 
 
     const albumId = req.params.albumId;
+
 
     const album = await findAlbum({albumId})
 

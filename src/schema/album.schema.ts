@@ -17,9 +17,6 @@ const params = {
         })
     }
 }
-export const loadAlbumSchema = object({
-    ...payload
-})
 
 // @ts-ignore
 export const deleteAlbumSchema = object({

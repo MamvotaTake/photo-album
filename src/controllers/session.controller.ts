@@ -18,12 +18,12 @@ export async function createUserSessionHandler(req: Request, res: Response) {
 
     const accessToken = signJwt(
         {...user, session:session._id},
-        {expiresIn: config.get('accessTokenTtl')}
+        {expiresIn: config.get<string>('accessTokenTtl')}
     )
 
     const refreshToken = signJwt(
         {...user, session:session._id},
-        {expiresIn: config.get('refreshTokenTtl')}
+        {expiresIn: config.get<string>('refreshTokenTtl')}
     )
 
     return res.send({accessToken, refreshToken})

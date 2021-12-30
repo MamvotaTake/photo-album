@@ -25,6 +25,11 @@ const params = {
         })
     }
 }
+// @ts-ignore
+export const updatePhotoSchema = object({
+    ...payload,
+    ...params,
+});
 
 export const getAllPhotoSchema = object({
     ...payload
@@ -35,5 +40,6 @@ export const deletePhotoSchema = object({
     ...params
 })
 
+export type  UpdatePhotoInput = TypeOf<typeof updatePhotoSchema>
 export type GetAllPhotoInput = TypeOf<typeof getAllPhotoSchema>
 export type DeletePhotoInput = TypeOf<typeof deletePhotoSchema>
