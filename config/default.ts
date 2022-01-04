@@ -4,9 +4,7 @@ export default {
     saltRounds: process.env.SALT,
     accessTokenTtl: process.env.ACCESS_TOKEN,
     refreshTokenTtl: process.env.REFRESH_TOKEN,
-    privateKey:`-----BEGIN RSA PRIVATE KEY-----
-`,
-    publicKey:`-----BEGIN PUBLIC KEY-----
-`,
+    privateKey:process.env.PRIVATE_KEY,
+    publicKey:process.env.PUBLIC_KEY
     PER_PAGE: 6,
 }
