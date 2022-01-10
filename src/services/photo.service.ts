@@ -12,23 +12,38 @@ export async function loadPhotos(input: DocumentDefinition<PhotoDocument>) {
 }
 
 export async function getAllPhotos(query: FilterQuery<PhotoDocument>, options: QueryOptions = {lean: true}) {
-    // await PhotoModel.aggregate([
-    //     {
-    //         '$limit': 4
-    //     }, {
-    //         '$count': 'photoId'
-    //     }, {
-    //         '$group': {
-    //             '_id': '$user',
-    //             'photoId': {
-    //                 '$sum': 1
-    //             }
-    //         }
-    //     }
-    // ])
+    
+    // Filtering
+    const queryObj = {...query}
 
-    const {page = 2, limit= 3} = query
-    return PhotoModel.find(query, {}, options).limit(limit).skip((page-1)*limit);
+    const excludedFields = ['page', 'sort', 'limit', 'fields'];
+
+    excludedFields.forEach((el) => delete queryObj[el]);
+
+    let queryStr = JSON.stringify(queryObj);
+    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`)
+
+    //Limiting
+    if (query.fields) {
+        const fields = query.fields.split(',').join(' ');
+        query.select(fields);
+    } else {
+        query.select('-__v');
+    }
+    // Pagination
+    const page = query.page * 1 || 1;
+    const limit = query.limit * 1 || 100;
+    const skip = (page - 1) * limit;
+
+    query.skip(skip).limit(limit);
+
+    if (query.page) {
+        const numPhoto = await PhotoModel.countDocuments();
+        if (skip >= numPhoto) throw new Error('This page does not exist');
+    }
+
+    return PhotoModel.find(JSON.parse(queryStr), {}, options)
+
 
 }
 
